@@ -8,8 +8,13 @@ package tensorflow
 
 /*
 #include "../internal/tensorflow/tensor_c_api.h"
+
+#include <stdlib.h>
 */
 import "C"
+import (
+	"unsafe"
+)
 
 // TF_DataType holds the type for a scalar value.  E.g., one slot in a tensor.
 // The enum values here are identical to corresponding values in types.proto.
@@ -68,23 +73,26 @@ func TF_NewStatus() *TF_Status {
 
 // Delete a previously created status object.
 func TF_DeleteStatus(s *TF_Status) {
-	//
+	C.TF_DeleteStatus((*C.TF_Status)(s))
 }
 
 // Record <code, msg> in *s.  Any previous information is lost.
 // A common use is to clear a status: TF_SetStatus(s, TF_OK, "");
 func TF_SetStatus(s *TF_Status, code TF_Code, msg string) {
-	//
+	cmsg := C.CString(msg)
+	defer C.free(unsafe.Pointer(cmsg))
+	C.TF_SetStatus((*C.TF_Status)(s), C.TF_Code(code), cmsg)
 }
 
 // Return the code record in *s.
 func TF_GetCode(s *TF_Status) TF_Code {
-	return 0
+	return TF_Code(C.TF_GetCode(((*C.TF_Status)(s))))
 }
 
 // Return a pointer to the error message in *s.  The return value
 // points to memory that is only usable until the next mutation to *s.
 // Always returns an empty string if TF_GetCode(s) is TF_OK.
 func TF_Message(s *TF_Status) string {
-	return ""
+	cmsg := C.TF_Message(((*C.TF_Status)(s)))
+	return C.GoString(cmsg)
 }
