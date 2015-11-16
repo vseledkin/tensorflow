@@ -163,6 +163,8 @@ func _TF_TensorData(p *_TF_Tensor) []byte {
 	return nil
 }
 
+// --------------------------------------------------------------------------
+
 // TF_SessionOptions holds options that can be passed during session creation.
 type _TF_SessionOptions C.TF_SessionOptions
 
