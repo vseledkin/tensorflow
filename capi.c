@@ -2,7 +2,7 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-#include "../internal/tensorflow/tensor_c_api.h"
+#include "./internal/tensorflow/tensor_c_api.h"
 
 #include <stdlib.h>
 

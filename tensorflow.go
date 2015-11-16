@@ -2,4 +2,5 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-package tensorflow
+// Package tensorflow provides Go bindings tensorflow.
+package tensorflow // import "github.com/chai2010/tensorflow"

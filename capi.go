@@ -7,7 +7,7 @@
 package tensorflow
 
 /*
-#include "../internal/tensorflow/tensor_c_api.h"
+#include "./internal/tensorflow/tensor_c_api.h"
 
 #include <stdlib.h>
 */
