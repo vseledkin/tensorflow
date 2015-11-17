@@ -57,7 +57,7 @@ const (
 
 // TF_Status holds error information.  It either has an OK code, or
 // else an error code with an associated error message.
-type Status struct {
+type TF_Status struct {
 	Code    TF_Code
 	Message string
 }
@@ -79,7 +79,9 @@ type Status struct {
 //   String length is encoded (varint?) starting at data[start_offset[i]]
 //   String contents follow immediately after string length.
 type TF_Tensor struct {
-	*_TF_Tensor
+	DataType TF_DataType
+	Dims []int
+	Data []byte
 }
 
 // --------------------------------------------------------------------------
