@@ -24,8 +24,13 @@ typedef std::unique_lock<std::mutex> mutex_lock;
 
 inline ConditionResult WaitForMilliseconds(mutex_lock* mu,
                                            condition_variable* cv, int64 ms) {
+#ifdef _MSC_VER
+  std::cv_status::cv_status s = cv->wait_for(*mu, std::chrono::milliseconds(ms));
+  return (s == std::cv_status::timeout) ? kCond_Timeout : kCond_MaybeNotified;
+#else
   std::cv_status s = cv->wait_for(*mu, std::chrono::milliseconds(ms));
   return (s == std::cv_status::timeout) ? kCond_Timeout : kCond_MaybeNotified;
+#endif
 }
 
 }  // namespace tensorflow

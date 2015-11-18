@@ -2,7 +2,7 @@
 #define TENSORFLOW_FRAMEWORK_ALLOCATOR_H_
 
 #include <stdlib.h>
-#include <unistd.h>
+//#include <unistd.h>
 
 #include <limits>
 
@@ -111,6 +111,7 @@ class Allocator {
 //  attr.set_on_host(true);
 //  Allocator* a = allocator(attr);
 struct AllocatorAttributes {
+  AllocatorAttributes(): value(0) {}
   void set_on_host(bool v) { value |= (static_cast<int>(v)); }
   bool on_host() const { return value & 0x1; }
   void set_nic_compatible(bool v) { value |= (static_cast<int>(v) << 1); }
@@ -120,7 +121,7 @@ struct AllocatorAttributes {
 
   void Merge(AllocatorAttributes other) { value |= other.value; }
 
-  uint32 value = 0;
+  uint32 value;
 };
 
 // Returns a trivial implementation of Allocator which uses the system
