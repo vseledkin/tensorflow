@@ -4,7 +4,11 @@
 
 #include <stdio.h>
 
+#include "tensorflow/core/public/tensor_c_api.h"
+//#include "tensorflow/core/public/tensor.h"
+
 int main() {
 	printf("hello tensorflow!\n");
 	return 0;
 }
+

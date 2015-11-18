@@ -13,9 +13,11 @@ set(TF_ROOT
 
 include_directories(AFTER
 	${TF_ROOT}
+	${TF_ROOT}/third_party/eigen3
 )
 
-#include(${CMAKE_CURRENT_SOURCE_DIR}/CMakeLists-protobuf.txt)
+# include third_party
+include(${CMAKE_CURRENT_SOURCE_DIR}/CMakeLists-protobuf.txt)
 
 #------------------------------------------------------------------------------
 # tf hello app
